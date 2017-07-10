@@ -23,13 +23,9 @@ class Coord {
                     longitude
                 };
                 gcj02 = this.WGS84_GCJ02(latitude, longitude);
-                this.GCJ02 = {
-                    ...gcj02
-                };
+                this.GCJ02 = gcj02;
                 bd09 = this.GCJ02_BD09(...gcj02);
-                this.BD09 = {
-                    ...bd09
-                }
+                this.BD09 = bd09;
             }
                 ;
                 break;
@@ -39,9 +35,7 @@ class Coord {
                     latitude,
                     longitude
                 }
-                this.BD09 = {
-                    ...this.GCJ02_BD09(latitude, longitude)
-                }
+                this.BD09 = this.GCJ02_BD09(latitude, longitude);
             }
                 ;
                 break;
@@ -51,9 +45,7 @@ class Coord {
                     latitude,
                     longitude
                 }
-                this.GCJ02 = {
-                    ...this.BD09_GCJ02(latitude, longitude)
-                }
+                this.GCJ02 = this.BD09_GCJ02(latitude, longitude)
             }
                 ;
                 break;
@@ -63,9 +55,7 @@ class Coord {
                     latitude,
                     longitude
                 }
-                this.BD09 = {
-                    ...this.GCJ02_BD09(latitude, longitude)
-                }
+                this.BD09 = this.GCJ02_BD09(latitude, longitude)
             }
                 ;
                 break;

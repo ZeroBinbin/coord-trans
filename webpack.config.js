@@ -26,7 +26,7 @@ module.exports = {
     output : {
         libraryTarget: 'umd',
         filename: PROD? '[name].min.js':'[name].js',
-        path: path.resolve(__dirname , './dist')
+        path: path.resolve(__dirname , './')
     },
     resolve : {
         extensions : [".js"]
