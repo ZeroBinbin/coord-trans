@@ -167,3 +167,4 @@ class Coord {
         return /^\-?(([0-8]?\d{1})°([0-5]?\d{1})′([0-5]?\d{1})″)|((90)°(00)′(00)″)$/.test(latitude)
     }
 }
+export default Coord ;
