@@ -63,8 +63,11 @@ class Coord {
     }
 
     GPS_WGS84(gps) {
-        let arr = gps.match(/(\d{1,3})°(\d{1,2})′(\d{1,3})″/);
-        let du = arr[1] ,fen = arr[2] ,miao = arr[3];
+        let arr = gps.match(/(\-?)(\d{1,3})°(\d{1,2})′(\d{1,3})″/);
+        let zf = arr[1] ,du = arr[2] ,fen = arr[3] ,miao = arr[4];
+        if(zf){
+            return -(du + fen / 60 + miao / 3600).toFixed(5);
+        }
         return (du + fen / 60 + miao / 3600).toFixed(5);
     }
 
@@ -74,19 +77,19 @@ class Coord {
         let ee = 0.00669342162296594323;
         function transformLat(x, y)
             {
-                let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.Sqrt(Math.Abs(x));
-                ret += (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
-                ret += (20.0 * Math.Sin(y * pi) + 40.0 * Math.Sin(y / 3.0 * pi)) * 2.0 / 3.0;
-                ret += (160.0 * Math.Sin(y / 12.0 * pi) + 320 * Math.Sin(y * pi / 30.0)) * 2.0 / 3.0;
+                let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+                ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+                ret += (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y / 3.0 * pi)) * 2.0 / 3.0;
+                ret += (160.0 * Math.sin(y / 12.0 * pi) + 320 * Math.sin(y * pi / 30.0)) * 2.0 / 3.0;
                 return ret;
             }
 
             function transformLon(x, y)
             {
-                let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.Sqrt(Math.Abs(x));
-                ret += (20.0 * Math.Sin(6.0 * x * pi) + 20.0 * Math.Sin(2.0 * x * pi)) * 2.0 / 3.0;
-                ret += (20.0 * Math.Sin(x * pi) + 40.0 * Math.Sin(x / 3.0 * pi)) * 2.0 / 3.0;
-                ret += (150.0 * Math.Sin(x / 12.0 * pi) + 300.0 * Math.Sin(x / 30.0 * pi)) * 2.0 / 3.0;
+                let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+                ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+                ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
+                ret += (150.0 * Math.sin(x / 12.0 * pi) + 300.0 * Math.sin(x / 30.0 * pi)) * 2.0 / 3.0;
                 return ret;
             }
             function outOfChina(lat ,lon)
@@ -110,17 +113,15 @@ class Coord {
             let dLat = transformLat(longitude - 105.0, latitude - 35.0);
             let dLon = transformLon(longitude - 105.0, latitude - 35.0);
             let radLat = latitude / 180.0 * pi;
-            let magic = Math.Sin(radLat);
+            let magic = Math.sin(radLat);
             magic = 1 - ee * magic * magic;
-            let sqrtMagic = Math.Sqrt(magic);
+            let sqrtMagic = Math.sqrt(magic);
             dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
-            dLon = (dLon * 180.0) / (a / sqrtMagic * Math.Cos(radLat) * pi);
+            dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
             return {
                 longitude : longitude + dLon ,
                 latitude : latitude + dLat
             }
-            mgLat = wgLat + dLat;
-            mgLon = wgLon + dLon;
     }
 
     GCJ02_BD09(latitude, longitude) {
@@ -150,11 +151,11 @@ class Coord {
     }
 
     testLongitude(longitude) {
-        return /^\-?(((1[0-7]\d{1})|(\d{1,2}))°([0-5]?\d{1})′([0-5]?\d{1})″)|((180)°(00)′(00)″)$/.test(longitude)
+        return /^\-?(((1[0-7]\d{1})|(\d{1,2}))°([0-5]?\d{1})′([0-5]?\d{1})(\.\d*)?″)|((180)°(00)′(00)″)$/.test(longitude)
     }
 
     testLatitude(latitude) {
-        return /^\-?(([0-8]?\d{1})°([0-5]?\d{1})′([0-5]?\d{1})″)|((90)°(00)′(00)″)$/.test(latitude)
+        return /^\-?(([0-8]?\d{1})°([0-5]?\d{1})′([0-5]?\d{1})(\.\d*)?″)|((90)°(00)′(00)″)$/.test(latitude)
     }
 }
 export default Coord ;
