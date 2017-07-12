@@ -48,6 +48,7 @@ console.log(coord.GCJ02);
 ## Class
 ### Coord
 constructor:
+
 name | type | required | default
 -|-|-|- 
 latitude | string|number | true | -
