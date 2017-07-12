@@ -51,7 +51,7 @@ constructor:
 
 name | type | required | default
 :-:|:-:|:-:|:-: 
-latitude | string&#124number | true | -
-longitude | string&#124number | true | -
+latitude | string&#124;number | true | -
+longitude | string&#124;number | true | -
 type | string ('WGS84', 'GCJ02', 'BD09') | false | 'GCJ02'
 
