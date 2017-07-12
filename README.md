@@ -1,18 +1,18 @@
-### 描述
+# 描述
 
 将地图坐标封装，并转换成不同类型的坐标
 
-### 使用方法
+# 使用方法
 1.下载包
 ```
 npm install coord-trans
 ```
 2.引入项目
-# webpack 
+### webpack 
 ```
 var coordTrans = require('coord-trans');
 ```
-# non-webpack
+### non-webpack
 ```
 <script src="./cord-trans/index.min.js"></script>
 ```
@@ -44,12 +44,12 @@ console.log(coord.WGS84);
 console.log(coord.GCJ02);
 //{ latitude: 34.6693585452, longitude: 115.8398437500 } 火星坐标
 ```
-### API
+# API
 ## Class
-# Coord
+### Coord
 constructor:
 name | type | required | default
-- | - | - | - 
+-|-|-|- 
 latitude | string|number | true | -
 longitude | string|number | true | -
 type | string ('WGS84', 'GCJ02', 'BD09') | false | 'GCJ02'
