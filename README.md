@@ -50,8 +50,8 @@ console.log(coord.GCJ02);
 constructor:
 
 name | type | required | default
--|-|-|- 
-latitude | string|number | true | -
-longitude | string|number | true | -
+:-:|:-:|:-:|:-: 
+latitude | string&#124number | true | -
+longitude | string&#124number | true | -
 type | string ('WGS84', 'GCJ02', 'BD09') | false | 'GCJ02'
 
