@@ -3,11 +3,11 @@
 将地图坐标封装，并转换成不同类型的坐标
 
 # 使用方法
-1.下载包
+## 1.下载包
 ```
 npm install coord-trans
 ```
-2.引入项目
+## 2.引入项目
 ### webpack 
 ```
 var coordTrans = require('coord-trans');
@@ -16,7 +16,7 @@ var coordTrans = require('coord-trans');
 ```
 <script src="./cord-trans/index.min.js"></script>
 ```
-3.使用
+## 3.使用
 ```
 //地球坐标转其他坐标 
 //已知gps坐标为纬度：34°40′13.82″ ，经度： 115°50′3.70″
